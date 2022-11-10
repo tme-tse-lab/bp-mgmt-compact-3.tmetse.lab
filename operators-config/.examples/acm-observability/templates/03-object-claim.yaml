@@ -1,0 +1,10 @@
+apiVersion: objectbucket.io/v1alpha1
+kind: ObjectBucketClaim
+metadata:
+  name: local-observe-claim
+  namespace: open-cluster-management-observability
+spec:
+  bucketName: local-observe-bucket
+  generateBucketName: local-observe-bucket
+  objectBucketName: local-observe-bucket
+  storageClassName: openshift-storage.noobaa.io

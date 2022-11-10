@@ -1,0 +1,85 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mirror-registry-config-map
+  namespace: multicluster-engine
+  #namespace: {{ $.Values.mgmt.ai.namespace }}
+data:
+  ca-bundle.crt: {{ toYaml $.Values.global.ai.ca | indent 2 }} 
+  registries.conf: |
+    unqualified-search-registries = [{{ $.Values.global.registry.url | quote }}]
+    [[registry]]
+       prefix = ""
+       location = "registry.redhat.io/rhacm2"
+       mirror-by-digest-only = false
+
+       [[registry.mirror]]
+       #location = "quay.io:443/acm-d"
+       location = "lab-registry.ocpmgmt.lab.diktio.net/cache-quayio-443/acm-d"
+
+    [[registry]]
+       prefix = ""
+       location = "registry.redhat.io/multicluster-engine"
+       mirror-by-digest-only = false
+
+       [[registry.mirror]]
+       #location = "quay.io:443/acm-d"
+       location = "lab-registry.ocpmgmt.lab.diktio.net/cache-quayio-443/acm-d"
+
+    [[registry]]
+       prefix = ""
+       location = "registry.access.redhat.com/openshift4/ose-oauth-proxy"
+       mirror-by-digest-only = false
+
+       [[registry.mirror]]
+       #location = "registry.redhat.io/openshift4/ose-oauth-proxy"
+       location = "lab-registry.ocpmgmt.lab.diktio.net/cache-registry-rh-io/openshift4/ose-oauth-proxy"
+
+    [[registry]]
+       prefix = ""
+       location = "quay.io/openshift"
+       mirror-by-digest-only = false
+
+       [[registry.mirror]]
+       location = "{{ $.Values.global.registry.url }}/{{ $.Values.global.registry.user }}"
+
+    [[registry]]
+       prefix = ""
+       location = "registry.redhat.io/openshift4"
+       mirror-by-digest-only = false
+
+       [[registry.mirror]]
+       location = "{{ $.Values.global.registry.url }}/{{ $.Values.global.registry.user }}"
+
+    [[registry]]
+       prefix = ""
+       location = "quay.io/edge-infrastructure"
+       mirror-by-digest-only = false
+
+       [[registry.mirror]]
+       location = "{{ $.Values.global.registry.url }}/{{ $.Values.global.registry.user }}"
+
+    [[registry]]
+       prefix = ""
+       location = "quay.io/ocpmetal"
+       mirror-by-digest-only = false
+
+       [[registry.mirror]]
+       location = "{{ $.Values.global.registry.url }}/{{ $.Values.global.registry.user }}"
+
+    [[registry]]
+       prefix = ""
+       location = "quay.io/openshift-release-dev/ocp-release"
+       mirror-by-digest-only = false
+
+       [[registry.mirror]]
+       location = "{{ $.Values.global.registry.url }}/{{ $.Values.global.registry.user }}/{{ $.Values.global.registry.path }}"
+
+    [[registry]]
+       prefix = ""
+       location = "quay.io/openshift-release-dev/ocp-v4.0-art-dev"
+       mirror-by-digest-only = false
+
+       [[registry.mirror]]
+       location = "{{ $.Values.global.registry.url }}/{{ $.Values.global.registry.user }}/{{ $.Values.global.registry.path }}"

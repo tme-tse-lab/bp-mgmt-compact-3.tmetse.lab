@@ -1,0 +1,9 @@
+{{- range $.Values.global.mirror.list }}
+apiVersion: hive.openshift.io/v1
+kind: ClusterImageSet
+metadata:
+  name: {{ .name }}
+spec:
+  releaseImage: {{ .path }}
+---
+{{- end }}

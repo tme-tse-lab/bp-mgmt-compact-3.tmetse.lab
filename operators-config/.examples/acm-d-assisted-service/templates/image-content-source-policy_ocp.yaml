@@ -1,0 +1,13 @@
+---
+apiVersion: operator.openshift.io/v1alpha1
+kind: ImageContentSourcePolicy
+metadata:
+  name: ocpmgmt-repo
+spec:
+  repositoryDigestMirrors:
+  - mirrors:
+    - lab-registry.ocpmgmt.lab.diktio.net/nsatsia/ocp41013
+    source: quay.io/openshift-release-dev/ocp-release
+  - mirrors:
+    - lab-registry.ocpmgmt.lab.diktio.net/nsatsia/ocp41013
+    source: quay.io/openshift-release-dev/ocp-v4.0-art-dev

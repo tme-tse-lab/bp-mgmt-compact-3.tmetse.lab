@@ -1,0 +1,15 @@
+apiVersion: operators.coreos.com/v1alpha1
+kind: CatalogSource
+metadata:
+  name: acm-custom-registry
+  namespace: openshift-marketplace
+spec:
+  displayName: Advanced Cluster Management
+  publisher: Red Hat
+  sourceType: grpc
+  image: "quay.io:443/acm-d/acm-custom-registry:2.5.0-SNAPSHOT-2022-05-16-21-43-45"
+  updateStrategy:
+    registryPoll:
+      interval: 10m
+  secrets:
+    - multiclusterhub-operator-pull-secret

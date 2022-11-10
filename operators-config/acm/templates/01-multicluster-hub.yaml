@@ -1,0 +1,20 @@
+---
+apiVersion: operator.open-cluster-management.io/v1
+kind: MultiClusterHub
+metadata:
+  name: multiclusterhub
+  namespace: open-cluster-management
+spec:
+  availabilityConfig: Basic
+  #enableClusterBackup: false
+  disableHubSelfManagement: true
+  #disableUpdateClusterImageSets: true
+  imagePullSecret: {{ $.Values.global.ai.pull_secret_name }}
+  #customCAConfigmap: <configmap>
+  #ingress:
+  #  sslCiphers:
+  #    - ECDHE-ECDSA-AES256-GCM-SHA384
+  #    - ECDHE-RSA-AES256-GCM-SHA384
+  #    - ECDHE-ECDSA-AES128-GCM-SHA256
+  #    - ECDHE-RSA-AES128-GCM-SHA256
+  #separateCertificateManagement: false

@@ -1,0 +1,31 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: infrastructure-operator
+rules:
+- apiGroups:
+  - apps
+  resources:
+  - statefulsets
+#  verbs: ["*"]
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: infrastructure-operator
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: infrastructure-operator
+subjects:
+- kind: ServiceAccount
+  name: assisted-service
+  namespace: {{ $.Values.mgmt.ai.namespace }}

@@ -1,0 +1,14 @@
+# Copyright Contributors to the Open Cluster Management project
+apiVersion: operators.coreos.com/v1alpha1
+kind: CatalogSource
+metadata:
+  name: multiclusterengine-catalog
+  namespace: openshift-marketplace
+spec:
+  displayName: MultiCluster Engine
+  publisher: Red Hat
+  sourceType: grpc
+  image: "quay.io:443/acm-d/mce-custom-registry:2.5.0-SNAPSHOT-2022-05-16-21-43-45"
+  updateStrategy:
+    registryPoll:
+      interval: 10m

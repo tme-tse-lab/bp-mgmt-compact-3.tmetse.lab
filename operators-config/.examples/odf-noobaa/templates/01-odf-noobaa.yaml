@@ -1,0 +1,33 @@
+---
+apiVersion: noobaa.io/v1alpha1
+kind: NooBaa
+metadata:
+  name: noobaa
+  namespace: openshift-storage
+spec:
+  coreResources:
+    limits:
+      cpu: 200m
+      memory: 2Gi
+    requests:
+      cpu: 200m
+      memory: 2Gi
+  dbResources:
+    limits:
+      cpu: 200m
+      memory: 2Gi
+    requests:
+      cpu: 200m
+      memory: 2Gi
+  dbType: postgres
+  dbVolumeResources:
+    requests:
+      storage: 50Gi
+  defaultBackingStoreSpec:
+    pvPool:
+      numVolumes: 1
+      resources:
+        requests:
+          storage: 500Gi 
+      storageClass: {{ $.Values.mgmt.default_storage_class | quote }}
+    type: pv-pool

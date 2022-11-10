@@ -1,0 +1,38 @@
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  annotations:
+    helm.sh/hook: post-install
+    helm.sh/hook-delete-policy: hook-succeeded
+    #helm.sh/hook-weight: "-5"
+  name: postsync-csv-wait-patch-metal3-job
+  namespace: telco-gitops
+spec:
+  template:
+    spec:
+      dnsPolicy: ClusterFirst
+      restartPolicy: OnFailure
+      serviceAccount: {{ $.Values.global.gitops.service_account }}
+      serviceAccountName: {{ $.Values.global.gitops.service_account_name }}
+      terminationGracePeriodSeconds: 30
+      containers:
+        - image: registry.redhat.io/openshift-gitops-1/argocd-rhel8:v1.2.0
+          imagePullPolicy: IfNotPresent
+          name: add-mgmt-argo-repo-creds-job
+          env:
+            - name: SLEEP
+              value: "3"
+          command:
+            - /bin/bash
+            - -c
+            - |
+              echo "Cluster Post-Install Repo-Creds Hook"
+              sleep 30
+              ARGOPW=$(oc get secret -n telco-gitops telco-gitops-cluster -o go-template='{{ "{{" }}index .data "admin.password"{{ "}}" }}' | base64 -d)
+              argocd --username=admin --password=$ARGOPW --insecure --config /tmp/config login telco-gitops-server-telco-gitops.apps.{{ $.Values.mgmt.name }}.{{ $.Values.global.domain }}
+              sleep 5
+              argocd repo add --config /tmp/config {{ $.Values.global.git_url }} --username {{ $.Values.global.git_user }} --password {{ $.Values.global.git_token }}
+              argocd logout --config /tmp/config admin
+              rm -f /tmp/config 
+

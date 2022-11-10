@@ -1,0 +1,23 @@
+ALLOW_PULLS_WITHOUT_STRICT_LOGGING: false
+AUTHENTICATION_TYPE: Database
+DEFAULT_TAG_EXPIRATION: 2w
+FEATURE_BUILD_SUPPORT: false
+FEATURE_DIRECT_LOGIN: true
+FEATURE_MAILING: false
+REGISTRY_TITLE: Red Hat Quay
+REGISTRY_TITLE_SHORT: Red Hat Quay
+TAG_EXPIRATION_OPTIONS:
+- 2w
+TEAM_RESYNC_STALE_TIME: 30m
+TESTING: false
+SERVER_HOSTNAME: lab-registry.mgmt.telco.lab
+DISTRIBUTED_STORAGE_CONFIG:
+  local_us:
+  - RadosGWStorage
+  - access_key: QRTMVUVN4X9SCZ6T3RCQ
+    bucket_name: mgmt-cluster-bucket
+    hostname: 10.198.7.135
+    is_secure: false
+    port: "80"
+    secret_key: WJBO2ai5xRcndqGe3K9QADeDCOIjQt5Vn834iH3G
+    storage_path: /datastorage/registry

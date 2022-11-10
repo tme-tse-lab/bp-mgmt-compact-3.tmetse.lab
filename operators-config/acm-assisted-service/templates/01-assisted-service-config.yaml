@@ -1,0 +1,20 @@
+---
+# https://github.com/openshift/assisted-service/blob/master/docs/operator.md#specifying-environmental-variables-via-configmap
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ $.Values.mgmt.ai.service_config_name }}
+  namespace: multicluster-engine
+data:
+  LOG_LEVEL: "debug"
+  SUPPORT_L2: "false"
+#  DISABLED_HOST_VALIDATIONS: "belongs-to-machine-cidr,belongs-to-majority-group"
+  ISO_IMAGE_TYPE: "full-iso"
+  PUBLIC_CONTAINER_REGISTRIES: {{ coalesce $.Values.mgmt.registry.url $.Values.global.registry.url | quote }}
+  #CONTROLLER_IMAGE: {{ $.Values.mgmt.ai.controller_image | quote }}
+##  ASSISTED_SERVICE_SCHEME: "http"
+##  SERVE_HTTPS: "false"
+#
+# Temporary setting to override the minimum disk requirements as I needed to overcome the OS disk selection issue :(
+#
+#  HW_VALIDATOR_REQUIREMENTS: '[{  "version": "default",  "master": {    "cpu_cores": 4,    "ram_mib": 16384,    "disk_size_gb": 600,    "installation_disk_speed_threshold_ms": 10,    "network_latency_threshold_ms": 100,    "packet_loss_percentage": 0  },  "worker": {    "cpu_cores": 2,    "ram_mib": 8192,    "disk_size_gb": 600,    "installation_disk_speed_threshold_ms": 10,    "network_latency_threshold_ms": 1000,    "packet_loss_percentage": 10  },  "sno": {    "cpu_cores": 8,    "ram_mib": 32768,    "disk_size_gb": 600,    "installation_disk_speed_threshold_ms": 10  }}]'

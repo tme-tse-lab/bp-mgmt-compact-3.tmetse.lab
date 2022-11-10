@@ -1,0 +1,47 @@
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  annotations:
+    helm.sh/hook: pre-install
+    helm.sh/hook-delete-policy: hook-succeeded
+    #helm.sh/hook-weight: "-5"
+  name: presync-set-global-pull-secret-job
+  namespace: multicluster-engine
+spec:
+  template:
+    spec:
+      dnsPolicy: ClusterFirst
+      restartPolicy: OnFailure
+      serviceAccount: {{ $.Values.global.gitops.service_account }}
+      serviceAccountName: {{ $.Values.global.gitops.service_account_name }}
+      terminationGracePeriodSeconds: 30
+      containers:
+        - image: {{ $.Values.global.gitops.hook_image }}
+          imagePullPolicy: IfNotPresent
+          name: set-global-pull-secret-job
+          env:
+            - name: SLEEP
+              value: "3"
+          command:
+            - /bin/bash
+            - -c
+            - |
+              echo "Create global pull secret if needed"
+              sleep $SLEEP
+              if [ {{ coalesce $.Values.mgmt.registry.url $.Values.global.registry.url | quote }} = "" ]; then
+                oc get secret pull-secret -n openshift-config --template='{{ "{{" }}index .data ".dockerconfigjson" | base64decode{{ "}}" }}' > /tmp/ps.json
+                oc --as=cluster-admin create secret generic {{ $.Values.global.ai.pull_secret_name }} -n multicluster-engine --type=kubernetes.io/dockerconfigjson --from-file=.dockerconfigjson=/tmp/ps.json
+              else
+                host_fqdn={{ coalesce $.Values.mgmt.registry.url $.Values.global.registry.url | quote}}
+                b64auth=$( echo -n '{{ coalesce $.Values.mgmt.registry.user $.Values.global.registry.user }}:{{ coalesce $.Values.mgmt.registry.password $.Values.global.registry.password }}' | openssl base64 )
+                AUTHSTRING="{\"$host_fqdn\": {\"auth\": \"$b64auth\",\"email\": \"\"}}"
+                oc get secret pull-secret -n openshift-config --template='{{ "{{" }}index .data ".dockerconfigjson" | base64decode{{ "}}" }}' > /tmp/ps.json
+                jq -c ".auths += $AUTHSTRING" < /tmp/ps.json > /tmp/ps-update.json
+                #cat /tmp/ps-update.json
+                oc --as=cluster-admin create secret generic {{ $.Values.global.ai.pull_secret_name }} -n multicluster-engine --type=kubernetes.io/dockerconfigjson --from-file=.dockerconfigjson=/tmp/ps-update.json
+              fi
+              rm -f /tmp/ps.json
+              rm -f /tmp/ps-update.json
+              echo "All done! Hooray!"
+              sleep 30

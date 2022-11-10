@@ -1,0 +1,58 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mirror-registry-config-map
+  namespace: multicluster-engine
+data:
+  ca-bundle.crt: {{ toYaml $.Values.global.ai.ca | indent 2 }} 
+  registries.conf: |
+    unqualified-search-registries = [{{ coalesce $.Values.mgmt.registry.url $.Values.mgmt.registry.url $.Values.global.registry.url | quote }}]
+    [[registry]]
+       prefix = ""
+       location = "quay.io/openshift"
+       mirror-by-digest-only = false
+
+       [[registry.mirror]]
+       location = "{{ coalesce $.Values.mgmt.registry.url $.Values.global.registry.url }}/{{ coalesce $.Values.mgmt.registry.user $.Values.global.registry.user }}"
+
+    [[registry]]
+       prefix = ""
+       #location = "registry.redhat.io/openshift4"
+       location = "registry.redhat.io"
+       mirror-by-digest-only = false
+
+       [[registry.mirror]]
+       location = "{{ coalesce $.Values.mgmt.registry.url $.Values.global.registry.url }}/{{ coalesce $.Values.mgmt.registry.user $.Values.global.registry.user }}"
+
+    [[registry]]
+       prefix = ""
+       location = "quay.io/edge-infrastructure"
+       mirror-by-digest-only = false
+
+       [[registry.mirror]]
+       location = "{{ coalesce $.Values.mgmt.registry.url $.Values.global.registry.url }}/{{ coalesce $.Values.mgmt.registry.user $.Values.global.registry.user }}"
+
+    [[registry]]
+       prefix = ""
+       location = "quay.io/ocpmetal"
+       mirror-by-digest-only = false
+
+       [[registry.mirror]]
+       location = "{{ coalesce $.Values.mgmt.registry.url $.Values.global.registry.url }}/{{ coalesce $.Values.mgmt.registry.user $.Values.global.registry.user }}"
+
+    [[registry]]
+       prefix = ""
+       location = "quay.io/openshift-release-dev/ocp-release"
+       mirror-by-digest-only = false
+
+       [[registry.mirror]]
+       location = "{{ coalesce $.Values.mgmt.registry.url $.Values.global.registry.url }}/{{ coalesce $.Values.mgmt.registry.user $.Values.global.registry.user }}/{{ coalesce $.Values.mgmt.registry.path $.Values.global.registry.path }}"
+
+    [[registry]]
+       prefix = ""
+       location = "quay.io/openshift-release-dev/ocp-v4.0-art-dev"
+       mirror-by-digest-only = false
+
+       [[registry.mirror]]
+       location = "{{ coalesce $.Values.mgmt.registry.url $.Values.global.registry.url }}/{{ coalesce $.Values.mgmt.registry.user $.Values.global.registry.user }}/{{ coalesce $.Values.mgmt.registry.path $.Values.global.registry.path }}"

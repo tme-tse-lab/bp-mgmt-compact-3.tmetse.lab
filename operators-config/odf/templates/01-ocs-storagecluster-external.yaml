@@ -1,0 +1,32 @@
+# Need ceph-external-cluster-details-exporter.py from your stable ODF operator
+# to genrate the external_cluster_details
+---
+kind: Secret
+apiVersion: v1
+metadata:
+  name: rook-ceph-external-cluster-details
+  namespace: openshift-storage
+data:
+  external_cluster_details: {{ $.Values.mgmt.external_cluster_details | b64enc | indent 2 }}
+type: Opaque
+---
+apiVersion: ocs.openshift.io/v1
+kind: StorageCluster
+metadata:
+  name: ocs-external-storagecluster
+  namespace: openshift-storage
+spec:
+  arbiter: {}
+  encryption:
+    kms: {}
+  externalStorage:
+    enable: true
+  labelSelector: {}
+  managedResources:
+    cephBlockPools: {}
+    cephConfig: {}
+    cephDashboard: {}
+    cephFilesystems: {}
+    cephObjectStoreUsers: {}
+    cephObjectStores: {}
+  version: 4.10.0
