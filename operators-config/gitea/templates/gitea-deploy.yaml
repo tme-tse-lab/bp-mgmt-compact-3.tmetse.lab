@@ -19,6 +19,7 @@ spec:
       containers:
       - name: gitea
         image: gitea/gitea:latest
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 3000
           name: gitea
