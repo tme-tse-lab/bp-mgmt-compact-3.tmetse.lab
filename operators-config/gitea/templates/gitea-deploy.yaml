@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -29,15 +30,3 @@ spec:
       - name: git-volume
         persistentVolumeClaim:
           claimName: git-volume
-
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: git-volume
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 20Gi
