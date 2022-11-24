@@ -1,0 +1,13 @@
+---
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: gitea-operator
+  namespace: openshift-operators
+spec:
+  sourceNamespace: openshift-marketplace
+  # Modify source name of the catalogsource for air-gapped deployments
+  source: redhat-gpte-gitea
+  channel: stable
+  installPlanApproval: Automatic
+  name: gitea-operator
