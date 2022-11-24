@@ -1,0 +1,22 @@
+---
+apiVersion: gpte.opentlc.com/v1
+kind: Gitea
+metadata:
+  name: gitea
+  namespace: gitea
+spec:
+  giteaMemoryRequest: 2Gi
+  giteaUserNumber: 0
+  postgresqlMemoryLimit: 1Gi
+  giteaUserEmailDomain: tmetse.com
+  giteaVolumeSize: 20Gi
+  giteaMemoryLimit: 2Gi
+  giteaAdminUser: tmeadmin
+  giteaImageTag: latest
+  postgresqlVolumeSize: 4Gi
+  giteaAllowLocalNetworkMigration: true
+  postgresqlMemoryRequest: 1.Gi
+  giteaAdminEmail: nsatsia@redhat.com
+  giteaRoute: gitea.mgmt.tmetse.lab
+  giteaAdminPassword: tm3l4b2022
+  giteaSsl: true
