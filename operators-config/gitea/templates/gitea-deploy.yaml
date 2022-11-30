@@ -20,6 +20,6 @@ spec:
   giteaRoute: gitea.mgmt.tmetse.lab
   giteaAdminPassword: tm3l4b2022
   giteaSsl: true
-  giteaDisableSsh: false
-  giteaStartSshServer: true
-  giteaSshPort: 2222
+  #giteaDisableSsh: false
+  #giteaStartSshServer: true
+  #giteaSshPort: 2222
