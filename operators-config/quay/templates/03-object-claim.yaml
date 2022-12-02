@@ -1,0 +1,10 @@
+apiVersion: objectbucket.io/v1alpha1
+kind: ObjectBucketClaim
+metadata:
+  name: local-registry-claim
+  namespace: openshift-operators
+spec:
+  bucketName: local-registry-bucket
+  generateBucketName: local-registry-bucket
+  objectBucketName: local-registry-bucket
+  storageClassName: openshift-storage.noobaa.io

@@ -1,0 +1,30 @@
+apiVersion: quay.redhat.com/v1
+kind: QuayRegistry
+metadata:
+  name: {{ coalesce $.Values.mgmt.quay.registry_name $.Values.global.quay.registry_name }}
+  namespace: openshift-operators
+spec:
+  components:
+    - kind: clair
+      managed: true
+    - kind: postgres
+      managed: true
+    - kind: objectstorage
+      managed: false
+    - kind: redis
+      managed: true
+    - kind: horizontalpodautoscaler
+      managed: true
+    - kind: route
+      managed: true
+    - kind: mirror
+      managed: true
+    - kind: monitoring
+      managed: true
+    - kind: tls	
+      managed: false      
+    - kind: quay	
+      managed: true	
+    - kind: clairpostgres	
+      managed: true	
+  configBundleSecret: {{ coalesce $.Values.mgmt.quay.config_secret $.Values.global.quay.config_secret }}
