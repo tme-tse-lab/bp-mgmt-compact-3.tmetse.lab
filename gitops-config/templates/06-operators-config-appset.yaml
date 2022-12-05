@@ -16,6 +16,11 @@ spec:
       name: '01-{{ $.Values.mgmt.name }}-config-{{ "{{" }}path.basename{{ "}}" }}'
       namespace: {{ $.Values.global.gitops.namespace }}
     spec:
+      ignoreDifferences:
+      - group: "*"
+        kind: Secret
+        jsonPointers:
+        - /data/config.yaml
       destination:
         namespace: {{ $.Values.global.gitops.namespace }}
         server: 'https://kubernetes.default.svc'
