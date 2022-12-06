@@ -41,7 +41,7 @@ spec:
           valueFiles:
             - "{{ $.Values.global.values_location }}"
             - "{{ $.Values.mgmt.values_location }}"
-#      syncPolicy:
+      syncPolicy: {}
 #        automated:
           # Default prune is "false" 
 #          prune: true
