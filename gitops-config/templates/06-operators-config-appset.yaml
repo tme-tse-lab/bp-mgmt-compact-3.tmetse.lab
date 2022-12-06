@@ -21,6 +21,10 @@ spec:
         kind: Secret
         jsonPointers:
         - /data/config.yaml
+      - group: "*"
+        kind: QuayRegistry
+        jsonPointers:
+        - /spec/configBundleSecret
       destination:
         namespace: {{ $.Values.global.gitops.namespace }}
         server: 'https://kubernetes.default.svc'
