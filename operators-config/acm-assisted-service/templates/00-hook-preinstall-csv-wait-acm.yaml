@@ -28,7 +28,7 @@ spec:
             - -c
             - |
               echo "LVM-Operator PreInstall Hook"
-              CSV_NAME=$(oc get csv -n open-cluster-management  | egrep open-cluster-management | awk '{print $1}')
+              CSV_NAME=$(oc get csv -n open-cluster-management  | egrep advanced-cluster-management | awk '{print $1}')
               CSV_STATUS="Pausing $SLEEP seconds..."
               while [ "$CSV_STATUS" != "InstallSucceeded" ]; do
                 echo "Waiting for the ACM Operator to be ready. ($CSV_STATUS)"
