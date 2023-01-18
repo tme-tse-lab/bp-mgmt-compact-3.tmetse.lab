@@ -16,13 +16,13 @@ data:
        [[registry.mirror]]
        location = "{{ coalesce $.Values.mgmt.registry.url $.Values.global.registry.url }}/cache-quayio-reldev"
 
-    [[registry]]
-       prefix = ""
-       location = "quay.io"
-       mirror-by-digest-only = false
+    #[[registry]]
+    #   prefix = ""
+    #   location = "quay.io"
+    #   mirror-by-digest-only = false
 
-       [[registry.mirror]]
-       location = "{{ coalesce $.Values.mgmt.registry.url $.Values.global.registry.url }}/cache-quayio"
+    #   [[registry.mirror]]
+    #  location = "{{ coalesce $.Values.mgmt.registry.url $.Values.global.registry.url }}/cache-quayio"
 
     [[registry]]
        prefix = ""
