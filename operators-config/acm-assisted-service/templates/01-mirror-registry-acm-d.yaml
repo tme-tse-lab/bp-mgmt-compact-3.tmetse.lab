@@ -1,4 +1,5 @@
 ---
+# Local mirror usage, not when cache proxy is used
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -10,27 +11,49 @@ data:
     unqualified-search-registries = [{{ coalesce $.Values.mgmt.registry.url $.Values.global.registry.url | quote }}]
     [[registry]]
        prefix = ""
-       location = "quay.io/openshift-release-dev"
+       location = "quay.io/openshift"
        mirror-by-digest-only = false
 
        [[registry.mirror]]
-       location = "{{ coalesce $.Values.mgmt.registry.url $.Values.global.registry.url }}/cache-quayio-reldev"
-
-    #[[registry]]
-    #   prefix = ""
-    #   location = "quay.io"
-    #   mirror-by-digest-only = false
-
-    #   [[registry.mirror]]
-    #  location = "{{ coalesce $.Values.mgmt.registry.url $.Values.global.registry.url }}/cache-quayio"
+       location = "{{ coalesce $.Values.mgmt.registry.url $.Values.global.registry.url }}/{{ coalesce $.Values.mgmt.registry.user $.Values.global.registry.user }}"
 
     [[registry]]
        prefix = ""
+       #location = "registry.redhat.io/openshift4"
        location = "registry.redhat.io"
        mirror-by-digest-only = false
 
        [[registry.mirror]]
-       location = "{{ coalesce $.Values.mgmt.registry.url $.Values.global.registry.url }}/cache-registryredhatio"
+       location = "{{ coalesce $.Values.mgmt.registry.url $.Values.global.registry.url }}/{{ coalesce $.Values.mgmt.registry.user $.Values.global.registry.user }}"
 
-# lab-registry.mgmt.tmetse.lab/cache-quayio/openshift-release-dev/ocp-release@sha256:95a7e02e086350774ee6d99ba7627b7dc5ad26e7c992ee53ad16aa9da8944a75
-# lab-registry.mgmt.tmetse.lab/cache-quayio/openshift-release-dev/ocp-v4.0-art-dev@sha256:95a7e02e086350774ee6d99ba7627b7dc5ad26e7c992ee53ad16aa9da8944a75
+    [[registry]]
+       prefix = ""
+       location = "quay.io/edge-infrastructure"
+       mirror-by-digest-only = false
+
+       [[registry.mirror]]
+       location = "{{ coalesce $.Values.mgmt.registry.url $.Values.global.registry.url }}/{{ coalesce $.Values.mgmt.registry.user $.Values.global.registry.user }}"
+
+    [[registry]]
+       prefix = ""
+       location = "quay.io/ocpmetal"
+       mirror-by-digest-only = false
+
+       [[registry.mirror]]
+       location = "{{ coalesce $.Values.mgmt.registry.url $.Values.global.registry.url }}/{{ coalesce $.Values.mgmt.registry.user $.Values.global.registry.user }}"
+
+    [[registry]]
+       prefix = ""
+       location = "quay.io/openshift-release-dev/ocp-release"
+       mirror-by-digest-only = false
+
+       [[registry.mirror]]
+       location = "{{ coalesce $.Values.mgmt.registry.url $.Values.global.registry.url }}/{{ coalesce $.Values.mgmt.registry.user $.Values.global.registry.user }}/{{ coalesce $.Values.mgmt.registry.path $.Values.global.registry.path }}"
+
+    [[registry]]
+       prefix = ""
+       location = "quay.io/openshift-release-dev/ocp-v4.0-art-dev"
+       mirror-by-digest-only = false
+
+       [[registry.mirror]]
+       location = "{{ coalesce $.Values.mgmt.registry.url $.Values.global.registry.url }}/{{ coalesce $.Values.mgmt.registry.user $.Values.global.registry.user }}/{{ coalesce $.Values.mgmt.registry.path $.Values.global.registry.path }}"

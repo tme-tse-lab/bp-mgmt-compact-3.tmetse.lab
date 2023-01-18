@@ -1,0 +1,36 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mirror-registry-config-map
+  namespace: multicluster-engine
+data:
+  ca-bundle.crt: {{ toYaml $.Values.global.ai.ca | indent 2 }} 
+  registries.conf: |
+    unqualified-search-registries = [{{ coalesce $.Values.mgmt.registry.url $.Values.global.registry.url | quote }}]
+    [[registry]]
+       prefix = ""
+       location = "quay.io/openshift-release-dev"
+       mirror-by-digest-only = false
+
+       [[registry.mirror]]
+       location = "{{ coalesce $.Values.mgmt.registry.url $.Values.global.registry.url }}/cache-quayio-reldev"
+
+    #[[registry]]
+    #   prefix = ""
+    #   location = "quay.io"
+    #   mirror-by-digest-only = false
+
+    #   [[registry.mirror]]
+    #  location = "{{ coalesce $.Values.mgmt.registry.url $.Values.global.registry.url }}/cache-quayio"
+
+    [[registry]]
+       prefix = ""
+       location = "registry.redhat.io"
+       mirror-by-digest-only = false
+
+       [[registry.mirror]]
+       location = "{{ coalesce $.Values.mgmt.registry.url $.Values.global.registry.url }}/cache-registryredhatio"
+
+# lab-registry.mgmt.tmetse.lab/cache-quayio/openshift-release-dev/ocp-release@sha256:95a7e02e086350774ee6d99ba7627b7dc5ad26e7c992ee53ad16aa9da8944a75
+# lab-registry.mgmt.tmetse.lab/cache-quayio/openshift-release-dev/ocp-v4.0-art-dev@sha256:95a7e02e086350774ee6d99ba7627b7dc5ad26e7c992ee53ad16aa9da8944a75
