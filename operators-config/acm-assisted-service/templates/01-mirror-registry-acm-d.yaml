@@ -10,11 +10,11 @@ data:
     unqualified-search-registries = [{{ coalesce $.Values.mgmt.registry.url $.Values.global.registry.url | quote }}]
     [[registry]]
        prefix = ""
-       location = "quay.io/openshift-release-dev/ocp-v4.0-art-dev"
+       location = "quay.io/openshift-release-dev"
        mirror-by-digest-only = false
 
        [[registry.mirror]]
-       location = "{{ coalesce $.Values.mgmt.registry.url $.Values.global.registry.url }}/cache-quayio/openshift-release-dev"
+       location = "{{ coalesce $.Values.mgmt.registry.url $.Values.global.registry.url }}/cache-quayio-reldev"
 
     [[registry]]
        prefix = ""
@@ -32,5 +32,5 @@ data:
        [[registry.mirror]]
        location = "{{ coalesce $.Values.mgmt.registry.url $.Values.global.registry.url }}/cache-registryredhatio"
 
-# 1385  podman pull quay.io/openshift-release-dev/ocp-release@sha256:95a7e02e086350774ee6d99ba7627b7dc5ad26e7c992ee53ad16aa9da8944a75
-# 1386  podman pull quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:95a7e02e086350774ee6d99ba7627b7dc5ad26e7c992ee53ad16aa9da8944a75
+# lab-registry.mgmt.tmetse.lab/cache-quayio/openshift-release-dev/ocp-release@sha256:95a7e02e086350774ee6d99ba7627b7dc5ad26e7c992ee53ad16aa9da8944a75
+# lab-registry.mgmt.tmetse.lab/cache-quayio/openshift-release-dev/ocp-v4.0-art-dev@sha256:95a7e02e086350774ee6d99ba7627b7dc5ad26e7c992ee53ad16aa9da8944a75
