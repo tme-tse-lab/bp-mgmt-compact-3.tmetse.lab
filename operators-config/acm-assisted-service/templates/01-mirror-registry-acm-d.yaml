@@ -14,7 +14,6 @@ data:
        mirror-by-digest-only = false
 
        [[registry.mirror]]
-       location = "{{ coalesce $.Values.mgmt.registry.url $.Values.global.registry.url }}/{{ coalesce $.Values.mgmt.registry.user $.Values.global.registry.user }}/{{ coalesce $.Values.mgmt.registry.path $.Values.global.registry.path }}"
        location = "{{ coalesce $.Values.mgmt.registry.url $.Values.global.registry.url }}/cache-quayio/openshift-release-dev"
 
     [[registry]]
