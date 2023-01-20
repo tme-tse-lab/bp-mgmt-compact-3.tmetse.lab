@@ -11,20 +11,28 @@ data:
     unqualified-search-registries = [{{ coalesce $.Values.mgmt.registry.url $.Values.global.registry.url | quote }}]
     [[registry]]
        prefix = ""
+       location = "registry.redhat.io"
+       mirror-by-digest-only = false
+
+       [[registry.mirror]]
+       location = "{{ coalesce $.Values.mgmt.registry.url $.Values.global.registry.url }}/cache-registryredhatio"
+
+    [[registry]]
+       prefix = ""
        location = "quay.io/openshift"
        mirror-by-digest-only = false
 
        [[registry.mirror]]
        location = "{{ coalesce $.Values.mgmt.registry.url $.Values.global.registry.url }}/{{ coalesce $.Values.mgmt.registry.user $.Values.global.registry.user }}"
 
-    [[registry]]
-       prefix = ""
-       #location = "registry.redhat.io/openshift4"
-       location = "registry.redhat.io"
-       mirror-by-digest-only = false
+    #[[registry]]
+    #   prefix = ""
+    #   #location = "registry.redhat.io/openshift4"
+    #   location = "registry.redhat.io"
+    #   mirror-by-digest-only = false
 
-       [[registry.mirror]]
-       location = "{{ coalesce $.Values.mgmt.registry.url $.Values.global.registry.url }}/{{ coalesce $.Values.mgmt.registry.user $.Values.global.registry.user }}"
+    #   [[registry.mirror]]
+    #   location = "{{ coalesce $.Values.mgmt.registry.url $.Values.global.registry.url }}/{{ coalesce $.Values.mgmt.registry.user $.Values.global.registry.user }}"
 
     [[registry]]
        prefix = ""
