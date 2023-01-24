@@ -35,8 +35,8 @@ spec:
               else
                 host_fqdn={{ $.Values.mgmt.registry.url | quote}}
                 b64auth=$( echo -n '{{ $.Values.mgmt.registry.user }}:{{ $.Values.mgmt.registry.password }}' | openssl base64 )
-{{- range $.Values.mgmt.registry.orgs }}
                 oc get secret pull-secret -n openshift-config --template='{{ "{{" }}index .data ".dockerconfigjson" | base64decode{{ "}}" }}' > /tmp/ps.json
+{{- range $.Values.mgmt.registry.orgs }}
                 AUTHSTRING="{\"$host_fqdn/{{ .name }}\": {\"auth\": \"$b64auth\",\"email\": \"\"}}"
                 jq -c ".auths += $AUTHSTRING" < /tmp/ps.json > /tmp/ps-tmp.json
                 mv -f /tmp/ps-tmp.json /tmp/ps.json
