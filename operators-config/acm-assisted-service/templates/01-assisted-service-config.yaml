@@ -10,7 +10,7 @@ data:
   SUPPORT_L2: "false"
 #  DISABLED_HOST_VALIDATIONS: "belongs-to-machine-cidr,belongs-to-majority-group"
   ISO_IMAGE_TYPE: "full-iso"
-  PUBLIC_CONTAINER_REGISTRIES: {{ coalesce $.Values.mgmt.registry.url $.Values.global.registry.url | quote }}
+  PUBLIC_CONTAINER_REGISTRIES: {{ $.Values.mgmt.registry.url | quote }}
   #CONTROLLER_IMAGE: {{ $.Values.mgmt.ai.controller_image | quote }}
 ##  ASSISTED_SERVICE_SCHEME: "http"
 ##  SERVE_HTTPS: "false"

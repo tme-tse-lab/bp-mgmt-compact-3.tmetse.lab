@@ -8,7 +8,7 @@ metadata:
 data:
   ca-bundle.crt: {{ toYaml $.Values.global.ai.ca | indent 2 }} 
   registries.conf: |
-    unqualified-search-registries = [{{ $.Values.global.registry.url | quote }}]
+    unqualified-search-registries = [{{ $.Values.mgmt.registry.url | quote }}]
     [[registry]]
        prefix = ""
        location = "registry.redhat.io/rhacm2"
@@ -42,7 +42,7 @@ data:
        mirror-by-digest-only = false
 
        [[registry.mirror]]
-       location = "{{ $.Values.global.registry.url }}/{{ $.Values.global.registry.user }}"
+       location = "{{ $.Values.mgmt.registry.url }}/{{ $.Values.mgmt.registry.user }}"
 
     [[registry]]
        prefix = ""
@@ -50,7 +50,7 @@ data:
        mirror-by-digest-only = false
 
        [[registry.mirror]]
-       location = "{{ $.Values.global.registry.url }}/{{ $.Values.global.registry.user }}"
+       location = "{{ $.Values.mgmt.registry.url }}/{{ $.Values.mgmt.registry.user }}"
 
     [[registry]]
        prefix = ""
@@ -58,7 +58,7 @@ data:
        mirror-by-digest-only = false
 
        [[registry.mirror]]
-       location = "{{ $.Values.global.registry.url }}/{{ $.Values.global.registry.user }}"
+       location = "{{ $.Values.mgmt.registry.url }}/{{ $.Values.mgmt.registry.user }}"
 
     [[registry]]
        prefix = ""
@@ -66,7 +66,7 @@ data:
        mirror-by-digest-only = false
 
        [[registry.mirror]]
-       location = "{{ $.Values.global.registry.url }}/{{ $.Values.global.registry.user }}"
+       location = "{{ $.Values.mgmt.registry.url }}/{{ $.Values.mgmt.registry.user }}"
 
     [[registry]]
        prefix = ""
@@ -74,7 +74,7 @@ data:
        mirror-by-digest-only = false
 
        [[registry.mirror]]
-       location = "{{ $.Values.global.registry.url }}/{{ $.Values.global.registry.user }}/{{ $.Values.global.registry.path }}"
+       location = "{{ $.Values.mgmt.registry.url }}/{{ $.Values.mgmt.registry.user }}/{{ $.Values.mgmt.registry.path }}"
 
     [[registry]]
        prefix = ""
@@ -82,4 +82,4 @@ data:
        mirror-by-digest-only = false
 
        [[registry.mirror]]
-       location = "{{ $.Values.global.registry.url }}/{{ $.Values.global.registry.user }}/{{ $.Values.global.registry.path }}"
+       location = "{{ $.Values.mgmt.registry.url }}/{{ $.Values.mgmt.registry.user }}/{{ $.Values.mgmt.registry.path }}"

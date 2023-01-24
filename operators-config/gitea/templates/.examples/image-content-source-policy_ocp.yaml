@@ -6,8 +6,8 @@ metadata:
 spec:
   repositoryDigestMirrors:
   - mirrors:
-    - "{{ coalesce $.Values.mgmt.registry.url $.Values.global.registry.url }}/{{ coalesce $.Values.mgmt.registry.user $.Values.global.registry.user }}/{{ coalesce $.Values.mgmt.registry.path $.Values.global.registry.path }}"
+    - "{{ $.Values.mgmt.registry.url }}/{{ $.Values.mgmt.registry.user }}/{{ $.Values.mgmt.registry.path }}"
     source: quay.io/openshift-release-dev/ocp-release
   - mirrors:
-    - "{{ coalesce $.Values.mgmt.registry.url $.Values.global.registry.url }}/{{ coalesce $.Values.mgmt.registry.user $.Values.global.registry.user }}/{{ coalesce $.Values.mgmt.registry.path $.Values.global.registry.path }}"
+    - "{{ $.Values.mgmt.registry.url }}/{{ $.Values.mgmt.registry.user }}/{{ $.Values.mgmt.registry.path }}"
     source: quay.io/openshift-release-dev/ocp-v4.0-art-dev

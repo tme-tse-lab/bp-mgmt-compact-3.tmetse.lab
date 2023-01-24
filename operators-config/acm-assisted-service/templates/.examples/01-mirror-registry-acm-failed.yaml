@@ -7,14 +7,14 @@ metadata:
 data:
   ca-bundle.crt: {{ toYaml $.Values.global.ai.ca | indent 2 }} 
   registries.conf: |
-    unqualified-search-registries = [{{ coalesce $.Values.mgmt.registry.url $.Values.global.registry.url | quote }}]
+    unqualified-search-registries = [{{ $.Values.mgmt.registry.url | quote }}]
     [[registry]]
        prefix = ""
        location = "quay.io/openshift-release-dev"
        mirror-by-digest-only = false
 
        [[registry.mirror]]
-       location = "{{ coalesce $.Values.mgmt.registry.url $.Values.global.registry.url }}/cache-quayio-reldev"
+       location = "{{ $.Values.mgmt.registry.url }}/cache-quayio-reldev"
 
     #[[registry]]
     #   prefix = ""
@@ -22,7 +22,7 @@ data:
     #   mirror-by-digest-only = false
 
     #   [[registry.mirror]]
-    #  location = "{{ coalesce $.Values.mgmt.registry.url $.Values.global.registry.url }}/cache-quayio"
+    #  location = "{{ $.Values.mgmt.registry.url }}/cache-quayio"
 
     [[registry]]
        prefix = ""
@@ -30,7 +30,7 @@ data:
        mirror-by-digest-only = false
 
        [[registry.mirror]]
-       location = "{{ coalesce $.Values.mgmt.registry.url $.Values.global.registry.url }}/cache-registryredhatio"
+       location = "{{ $.Values.mgmt.registry.url }}/cache-registryredhatio"
 
 # lab-registry.mgmt.tmetse.lab/cache-quayio/openshift-release-dev/ocp-release@sha256:95a7e02e086350774ee6d99ba7627b7dc5ad26e7c992ee53ad16aa9da8944a75
 # lab-registry.mgmt.tmetse.lab/cache-quayio/openshift-release-dev/ocp-v4.0-art-dev@sha256:95a7e02e086350774ee6d99ba7627b7dc5ad26e7c992ee53ad16aa9da8944a75

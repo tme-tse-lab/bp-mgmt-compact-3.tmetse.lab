@@ -8,14 +8,14 @@ metadata:
 data:
   ca-bundle.crt: {{ toYaml $.Values.global.ai.ca | indent 2 }} 
   registries.conf: |
-    unqualified-search-registries = [{{ coalesce $.Values.mgmt.registry.url $.Values.global.registry.url | quote }}]
+    unqualified-search-registries = [{{ $.Values.mgmt.registry.url | quote }}]
     [[registry]]
        prefix = ""
        location = "registry.redhat.io"
        mirror-by-digest-only = false
 
        [[registry.mirror]]
-       location = "{{ coalesce $.Values.mgmt.registry.url $.Values.global.registry.url }}/cache-registryredhatio"
+       location = "{{ $.Values.mgmt.registry.url }}/cache-registryredhatio"
 
     [[registry]]
        prefix = ""
@@ -23,7 +23,7 @@ data:
        mirror-by-digest-only = false
 
        [[registry.mirror]]
-       location = "{{ coalesce $.Values.mgmt.registry.url $.Values.global.registry.url }}/{{ coalesce $.Values.mgmt.registry.user $.Values.global.registry.user }}"
+       location = "{{ $.Values.mgmt.registry.url }}/{{ $.Values.mgmt.registry.user }}"
 
     #[[registry]]
     #   prefix = ""
@@ -32,7 +32,7 @@ data:
     #   mirror-by-digest-only = false
 
     #   [[registry.mirror]]
-    #   location = "{{ coalesce $.Values.mgmt.registry.url $.Values.global.registry.url }}/{{ coalesce $.Values.mgmt.registry.user $.Values.global.registry.user }}"
+    #   location = "{{ $.Values.mgmt.registry.url }}/{{ $.Values.mgmt.registry.user }}"
 
     [[registry]]
        prefix = ""
@@ -40,7 +40,7 @@ data:
        mirror-by-digest-only = false
 
        [[registry.mirror]]
-       location = "{{ coalesce $.Values.mgmt.registry.url $.Values.global.registry.url }}/{{ coalesce $.Values.mgmt.registry.user $.Values.global.registry.user }}"
+       location = "{{ $.Values.mgmt.registry.url }}/{{ $.Values.mgmt.registry.user }}"
 
     [[registry]]
        prefix = ""
@@ -48,7 +48,7 @@ data:
        mirror-by-digest-only = false
 
        [[registry.mirror]]
-       location = "{{ coalesce $.Values.mgmt.registry.url $.Values.global.registry.url }}/{{ coalesce $.Values.mgmt.registry.user $.Values.global.registry.user }}"
+       location = "{{ $.Values.mgmt.registry.url }}/{{ $.Values.mgmt.registry.user }}"
 
     [[registry]]
        prefix = ""
@@ -56,7 +56,7 @@ data:
        mirror-by-digest-only = false
 
        [[registry.mirror]]
-       location = "{{ coalesce $.Values.mgmt.registry.url $.Values.global.registry.url }}/{{ coalesce $.Values.mgmt.registry.user $.Values.global.registry.user }}/{{ coalesce $.Values.mgmt.registry.path $.Values.global.registry.path }}"
+       location = "{{ $.Values.mgmt.registry.url }}/{{ $.Values.mgmt.registry.user }}/{{ $.Values.mgmt.registry.path }}"
 
     [[registry]]
        prefix = ""
@@ -64,4 +64,4 @@ data:
        mirror-by-digest-only = false
 
        [[registry.mirror]]
-       location = "{{ coalesce $.Values.mgmt.registry.url $.Values.global.registry.url }}/{{ coalesce $.Values.mgmt.registry.user $.Values.global.registry.user }}/{{ coalesce $.Values.mgmt.registry.path $.Values.global.registry.path }}"
+       location = "{{ $.Values.mgmt.registry.url }}/{{ $.Values.mgmt.registry.user }}/{{ $.Values.mgmt.registry.path }}"

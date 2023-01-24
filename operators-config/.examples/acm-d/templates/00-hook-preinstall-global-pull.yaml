@@ -29,12 +29,12 @@ spec:
             - |
               echo "Create global pull secret if needed"
               sleep $SLEEP
-              if [ {{ $.Values.global.registry.url | quote }} = "" ]; then
+              if [ {{ $.Values.mgmt.registry.url | quote }} = "" ]; then
                 oc get secret pull-secret -n openshift-config --template='{{ "{{" }}index .data ".dockerconfigjson" | base64decode{{ "}}" }}' > /tmp/ps.json
                 oc --as=cluster-admin create secret generic {{ $.Values.global.ai.pull_secret_name }} -n multicluster-engine --type=kubernetes.io/dockerconfigjson --from-file=.dockerconfigjson=/tmp/ps.json
               else
-                host_fqdn={{ $.Values.global.registry.url | quote}}
-                b64auth=$( echo -n '{{ $.Values.global.registry.user }}:{{ $.Values.global.registry.password }}' | openssl base64 )
+                host_fqdn={{ $.Values.mgmt.registry.url | quote}}
+                b64auth=$( echo -n '{{ $.Values.mgmt.registry.user }}:{{ $.Values.mgmt.registry.password }}' | openssl base64 )
                 AUTHSTRING="{\"$host_fqdn\": {\"auth\": \"$b64auth\",\"email\": \"\"}}"
                 oc get secret pull-secret -n openshift-config --template='{{ "{{" }}index .data ".dockerconfigjson" | base64decode{{ "}}" }}' > /tmp/ps.json
                 jq -c ".auths += $AUTHSTRING" < /tmp/ps.json > /tmp/ps-update.json

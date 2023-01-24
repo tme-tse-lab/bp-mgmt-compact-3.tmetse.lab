@@ -4,5 +4,5 @@ metadata:
   name: registry-ca-local
   namespace: openshift-config
 data:
-  {{ coalesce $.Values.mgmt.registry.url $.Values.global.registry.url }}: {{ toYaml $.Values.global.ai.ca | indent 2 }}
+  {{ $.Values.mgmt.registry.url }}: {{ toYaml $.Values.global.ai.ca | indent 2 }}
   
