@@ -36,11 +36,13 @@ spec:
                 host_fqdn={{ $.Values.mgmt.registry.url | quote}}
                 b64auth=$( echo -n '{{ $.Values.mgmt.registry.user }}:{{ $.Values.mgmt.registry.password }}' | openssl base64 )
                 oc get secret pull-secret -n openshift-config --template='{{ "{{" }}index .data ".dockerconfigjson" | base64decode{{ "}}" }}' > /tmp/ps.json
+                AUTHSTRING="{\"$host_fqdn\": {\"auth\": \"$b64auth\",\"email\": \"\"}}"
+                jq -c ".auths += $AUTHSTRING" < /tmp/ps.json > /tmp/ps-tmp.json
+                mv -f /tmp/ps-tmp.json /tmp/ps.json
 {{- range $.Values.mgmt.registry.orgs }}
                 AUTHSTRING="{\"$host_fqdn/{{ .name }}\": {\"auth\": \"$b64auth\",\"email\": \"\"}}"
                 jq -c ".auths += $AUTHSTRING" < /tmp/ps.json > /tmp/ps-tmp.json
                 mv -f /tmp/ps-tmp.json /tmp/ps.json
-                #cat /tmp/ps.json
 {{- end }}
                 oc --as=cluster-admin delete secret {{ $.Values.global.ai.pull_secret_name }} -n multicluster-engine
                 oc --as=cluster-admin create secret generic {{ $.Values.global.ai.pull_secret_name }} -n multicluster-engine --type=kubernetes.io/dockerconfigjson --from-file=.dockerconfigjson=/tmp/ps.json
