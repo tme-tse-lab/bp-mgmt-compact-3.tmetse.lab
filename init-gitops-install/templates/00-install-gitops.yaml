@@ -9,7 +9,7 @@ spec:
     env:
     - name: ARGOCD_CLUSTER_CONFIG_NAMESPACES
       value: openshift-gitops, {{ $.Values.global.gitops.namespace }}
-  channel: "stable"
+  channel: "latest"
   installPlanApproval: Automatic
   name: openshift-gitops-operator
   # Modify source name of the catalogsource for isolated network deployments
