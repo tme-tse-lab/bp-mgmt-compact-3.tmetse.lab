@@ -9,7 +9,7 @@ spec:
     resources:
       limits:
         cpu: "2"
-        memory: 1Gi
+        memory: 2Gi
       requests:
         cpu: 250m
         memory: 512Mi
@@ -18,10 +18,10 @@ spec:
     resources:
       limits:
         cpu: "2"
-        memory: 2Gi
+        memory: 3Gi
       requests:
         cpu: 250m
-        memory: 1Gi
+        memory: 2Gi
     sharding:
       enabled: true
       replicas: 3
