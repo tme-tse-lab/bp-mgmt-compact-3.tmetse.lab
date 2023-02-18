@@ -6,5 +6,5 @@ metadata:
   namespace: openshift-update-service
 spec:
   replicas: 2
-  releases: registry.example.com/ocp4/openshift4-release-images
-  graphDataImage: registry.example.com/openshift/graph-data:latest
+  releases: quay.io/openshift-release-dev/ocp-release:4.10.51-x86_64
+  graphDataImage: quay.io/openshift-release-dev/ocp-release:4.10.51-x86_64
