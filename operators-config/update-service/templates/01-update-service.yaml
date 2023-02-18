@@ -6,6 +6,6 @@ metadata:
   namespace: openshift-update-service
 spec:
   replicas: 2
-  releases: lab-registry.mgmt.tmetse.lab/gitops_mgmt/ocp41051:4.10.51-x86_64-ocp-release
+  releases: lab-registry.mgmt.tmetse.lab/gitops_mgmt/openshift4-release-images
   #releases: quay.io/openshift-release-dev/ocp-release:4.10.51-x86_64
   graphDataImage: lab-registry.mgmt.tmetse.lab/gitops_mgmt/graph-data:latest
