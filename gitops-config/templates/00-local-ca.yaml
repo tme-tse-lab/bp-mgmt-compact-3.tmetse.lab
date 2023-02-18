@@ -5,4 +5,4 @@ metadata:
   namespace: openshift-config
 data:
   {{ $.Values.mgmt.registry.url }}: {{ toYaml $.Values.global.ai.ca | indent 2 }}
-  
+  updateservice-registry: {{ toYaml $.Values.global.ai.ca | indent 2 }}
