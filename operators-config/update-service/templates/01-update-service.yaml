@@ -1,0 +1,9 @@
+---
+apiVersion: updateservice.operator.openshift.io/v1
+kind: UpdateService
+metadata:
+  name: service
+spec:
+  replicas: 2
+  releases: registry.example.com/ocp4/openshift4-release-images
+  graphDataImage: registry.example.com/openshift/graph-data:latest
