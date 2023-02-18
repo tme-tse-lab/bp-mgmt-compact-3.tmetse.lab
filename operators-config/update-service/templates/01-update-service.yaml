@@ -7,4 +7,4 @@ metadata:
 spec:
   replicas: 2
   releases: quay.io/openshift-release-dev/ocp-release:4.10.51-x86_64
-  graphDataImage: quay.io/openshift-release-dev/ocp-release:4.10.51-x86_64
+  graphDataImage: https://github.com/openshift/cincinnati-graph-data/archive/master.tar.gz
