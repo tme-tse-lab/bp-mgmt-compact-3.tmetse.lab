@@ -27,9 +27,9 @@ spec:
             - /bin/bash
             - -c
             - |
-              echo "ODF PostSync Hook"
-              DEFAULT_CLASS="odf-storagecluster-ceph-rbd"
+              echo "Adding local CA to the global CAs."
               CONFIG_MAP="Pausing $SLEEP seconds..."
+              echo "Wait for local CA ConfigMap to be configured/available."
               while [ "$CONFIG_MAP" != "registry-ca-local" ]; do
                 echo "Waiting for the CA ConfigMap to be defined. ($CONFIG_MAP)"
                 sleep $SLEEP
