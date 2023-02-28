@@ -3,7 +3,7 @@ kind: MultiClusterObservability
 metadata:
   name: observability
 spec:
-  availabilityConfig: High 
+  #availabilityConfig: High 
   enableDownSampling: false
   imagePullPolicy: Always
   observabilityAddonSpec:
@@ -16,7 +16,7 @@ spec:
     metricObjectStorage:
       name: thanos-object-storage
       key: thanos.yaml
-    statefulSetSize: 10Gi
+    #statefulSetSize: 10Gi
     statefulSetStorageClass: gp2
-  RetentionConfig:
-    retentionInLocal: 24h
+  #RetentionConfig:
+  #  retentionInLocal: 24h
