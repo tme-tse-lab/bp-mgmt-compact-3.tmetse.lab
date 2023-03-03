@@ -9,19 +9,19 @@ spec:
     resources:
       limits:
         cpu: "2"
-        memory: 2Gi
+        memory: 3Gi
       requests:
         cpu: 250m
-        memory: 512Mi
+        memory: 1Gi
   controller:
     processors: {}
     resources:
       limits:
         cpu: "2"
-        memory: 3Gi
+        memory: 4Gi
       requests:
         cpu: 250m
-        memory: 2Gi
+        memory: 3Gi
     sharding:
       enabled: true
       replicas: 3
@@ -29,10 +29,10 @@ spec:
     resources:
       limits:
         cpu: 500m
-        memory: 256Mi
+        memory: 512Mi
       requests:
         cpu: 250m
-        memory: 128Mi
+        memory: 256Mi
   grafana:
     enabled: false
     ingress:
@@ -40,10 +40,10 @@ spec:
     resources:
       limits:
         cpu: 500m
-        memory: 256Mi
+        memory: 512Mi
       requests:
         cpu: 250m
-        memory: 128Mi
+        memory: 256Mi
     route:
       enabled: false
   ha:
@@ -51,10 +51,10 @@ spec:
     resources:
       limits:
         cpu: 500m
-        memory: 256Mi
+        memory: 512Mi
       requests:
         cpu: 250m
-        memory: 128Mi
+        memory: 256Mi
   initialSSHKnownHosts: {}
   prometheus:
     enabled: false
@@ -67,18 +67,18 @@ spec:
     resources:
       limits:
         cpu: 500m
-        memory: 256Mi
-      requests:
-        cpu: 250m
-        memory: 128Mi
-  repo:
-    resources:
-      limits:
-        cpu: "1"
         memory: 512Mi
       requests:
         cpu: 250m
         memory: 256Mi
+  repo:
+    resources:
+      limits:
+        cpu: "1"
+        memory: 1Gi
+      requests:
+        cpu: 250m
+        memory: 512Mi
   resourceExclusions: |
     - apiGroups:
       - tekton.dev
@@ -98,10 +98,10 @@ spec:
     resources:
       limits:
         cpu: 500m
-        memory: 256Mi
+        memory: 512Mi
       requests:
         cpu: 125m
-        memory: 128Mi
+        memory: 256Mi
     route:
       enabled: true
     service:
