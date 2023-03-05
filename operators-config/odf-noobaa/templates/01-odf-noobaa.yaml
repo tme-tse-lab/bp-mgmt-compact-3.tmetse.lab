@@ -7,10 +7,10 @@ metadata:
 spec:
   coreResources:
     limits:
-      cpu: 500m
+      cpu: 1
       memory: 4Gi
     requests:
-      cpu: 500m
+      cpu: 1
       memory: 4Gi
   dbResources:
     limits:
