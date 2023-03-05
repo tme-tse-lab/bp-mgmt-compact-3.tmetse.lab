@@ -7,18 +7,18 @@ metadata:
 spec:
   coreResources:
     limits:
-      cpu: 200m
-      memory: 2Gi
+      cpu: 500m
+      memory: 4Gi
     requests:
-      cpu: 200m
-      memory: 2Gi
+      cpu: 500m
+      memory: 4Gi
   dbResources:
     limits:
-      cpu: 200m
-      memory: 2Gi
+      cpu: 500m
+      memory: 4Gi
     requests:
-      cpu: 200m
-      memory: 2Gi
+      cpu: 500m
+      memory: 4Gi
   dbType: postgres
   dbVolumeResources:
     requests:
