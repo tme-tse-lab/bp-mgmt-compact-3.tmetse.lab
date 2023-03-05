@@ -25,9 +25,9 @@ spec:
       storage: 50Gi
   defaultBackingStoreSpec:
     pvPool:
-      numVolumes: 1
+      numVolumes: 5
       resources:
         requests:
-          storage: 500Gi 
+          storage: 50Gi 
       storageClass: {{ $.Values.mgmt.default_storage_class | quote }}
     type: pv-pool
