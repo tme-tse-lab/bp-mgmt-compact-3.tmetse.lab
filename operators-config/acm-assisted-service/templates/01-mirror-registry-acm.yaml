@@ -6,7 +6,7 @@ metadata:
   name: mirror-registry-config-map
   namespace: multicluster-engine
 data:
-  ca-bundle.crt: {{ toYaml $.Values.global.ai.ca | indent 2 }} 
+  #ca-bundle.crt: {{ toYaml $.Values.global.ai.ca | indent 2 }} 
   registries.conf: |
     unqualified-search-registries = [{{ $.Values.mgmt.registry.url | quote }}]
     [[registry]]
