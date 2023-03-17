@@ -5,6 +5,15 @@ metadata:
  name: {{ $.Values.mgmt.name }}-{{ $.Values.global.gitops.namespace }}-common-configs
  namespace: {{ $.Values.global.gitops.namespace }}
 spec:
+  ignoreDifferences:
+  - group: "*"
+    kind: ConfigMap
+    name: v4-0-config-user-idp-0-ca
+    namespace: openshift-authentication
+  - group: "*"
+    kind: ConfigMap
+    name: openshift-user-ca
+    namespace: openshift-controller-manager
   destination:
     namespace: {{ $.Values.global.gitops.namespace }}
     server: 'https://kubernetes.default.svc'
