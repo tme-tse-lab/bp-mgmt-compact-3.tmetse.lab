@@ -21,6 +21,7 @@ spec:
         kind: Secret
         jsonPointers:
         - /data/config.yaml
+        - /data/thanos.yaml
       - group: "*"
         kind: QuayRegistry
         jsonPointers:
