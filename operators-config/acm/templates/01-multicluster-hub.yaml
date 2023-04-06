@@ -7,7 +7,7 @@ metadata:
 spec:
   availabilityConfig: Basic
   #enableClusterBackup: false
-  disableHubSelfManagement: true
+  disableHubSelfManagement: false
   #disableUpdateClusterImageSets: true
   imagePullSecret: {{ $.Values.global.ai.pull_secret_name }}
   #customCAConfigmap: <configmap>
